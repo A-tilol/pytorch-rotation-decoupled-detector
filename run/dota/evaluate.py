@@ -39,7 +39,9 @@ def main():
         dir_weight = os.path.join(dir_save, 'weight')
         indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight)]
         current_step = max(indexes)
-        checkpoint = os.path.join(dir_weight, '%d.pth' % current_step)
+        checkpoint = os.path.join(dir_weight, os.listdir(dir_weight)[0])
+        print("checkpoint", checkpoint)
+        # checkpoint = os.path.join(dir_weight, '%d.pth' % current_step)
 
     batch_size = 32
     num_workers = 4
@@ -129,8 +131,8 @@ if __name__ == '__main__':
     device_ids = [0]
     torch.cuda.set_device(device_ids[0])
 
-    dir_dataset = '<replace with your local path>'
-    dir_save = '<replace with your local path>'
+    dir_dataset = '/content/dota/'
+    dir_save = '/content/'
 
     backbone = resnet.resnet101
     checkpoint = None

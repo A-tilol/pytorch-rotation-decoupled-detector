@@ -1,6 +1,7 @@
 import sys, os
-print(os.path.abspath('.'))
-sys.path.append(os.path.abspath('.'))
+print(os.path.join(os.path.abspath('.'), "utils/box/ext/rbbox_overlap_cpu"))
+sys.path.append(
+    os.path.join(os.path.abspath('.'), "utils/box/ext/rbbox_overlap_cpu"))
 
 from pprint import pprint
 pprint(sys.path)

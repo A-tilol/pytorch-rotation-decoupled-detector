@@ -1,4 +1,5 @@
 import sys, os
+print(os.path.abspath('.'))
 sys.path.append(os.path.abspath('.'))
 
 from pprint import pprint

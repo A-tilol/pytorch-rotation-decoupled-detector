@@ -82,6 +82,9 @@ def main():
         images = images.cuda() / 255
         dets = model(images)
         for (det, info) in zip(dets, infos):
+            from pprint import pprint
+            pprint(det)
+            pprint(info)
             if det:
                 bboxes, scores, labels = det
                 bboxes = bboxes.cpu().numpy()

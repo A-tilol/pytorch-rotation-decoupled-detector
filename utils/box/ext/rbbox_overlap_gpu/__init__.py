@@ -6,5 +6,5 @@ sys.path.append(
 from pprint import pprint
 pprint(sys.path)
 
-from rbbox_overlap import rbbox_overlaps as rbbox_iou
-from rbbox_overlap import rotate_gpu_nms as rbbox_nms
+from .rbbox_overlap import rbbox_overlaps as rbbox_iou
+from .rbbox_overlap import rotate_gpu_nms as rbbox_nms

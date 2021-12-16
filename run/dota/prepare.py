@@ -95,9 +95,9 @@ if __name__ == '__main__':
     # (2) crop images
     # (3) generate image-set files
 
-    dir_dataset = '<replace with your local path>'
+    dir_dataset = '/content/dota/'
 
-    main('train')
-    main('val')
+    # main('train')
+    # main('val')
     main('test')
     main('test', True)

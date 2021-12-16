@@ -37,8 +37,8 @@ def main():
     global checkpoint
     if checkpoint is None:
         dir_weight = os.path.join(dir_save, 'weight')
-        indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight)]
-        current_step = max(indexes)
+        # indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight)]
+        # current_step = max(indexes)
         checkpoint = os.path.join(dir_weight, os.listdir(dir_weight)[0])
         print("checkpoint", checkpoint)
         # checkpoint = os.path.join(dir_weight, '%d.pth' % current_step)

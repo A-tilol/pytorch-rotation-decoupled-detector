@@ -16,6 +16,7 @@ import os
 import tqdm
 import torch
 import numpy as np
+import argparse
 
 from collections import defaultdict
 from torch.utils.data import DataLoader
@@ -34,6 +35,10 @@ from utils.parallel import CustomDetDataParallel
 
 @torch.no_grad()
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--thresh', default=0.01, type=float)
+    args = parser.parse_args()
+    
     global checkpoint
     if checkpoint is None:
         dir_weight = os.path.join(dir_save, 'weight')
@@ -59,7 +64,7 @@ def main():
         'scales': [[2 ** 0, 2 ** (1 / 3), 2 ** (2 / 3)]] * 5,
         'old_version': old_version
     }
-    conf_thresh = 0.01
+    conf_thresh = args.thresh
     nms_thresh = 0.45
     cfg = {
         'prior_box': prior_box,

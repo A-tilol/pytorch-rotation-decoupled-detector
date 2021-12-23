@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
     dir_dataset = '/content/dota/'
 
-    # main('train')
-    # main('val')
-    main('test')
-    main('test', True)
+    main('train')
+    main('val')
+    # main('test')
+    # main('test', True)

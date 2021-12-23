@@ -9,3 +9,5 @@ CATEGORY_DOTA_V10 = ['baseball-diamond', 'basketball-court', 'bridge', 'ground-t
 CATEGORY_UCAS_AOD = ['car', 'plane']
 
 CATEGORY_HRSC2016 = ['ship']
+
+CATEGORY_OBC = ['business_card']

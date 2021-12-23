@@ -95,7 +95,7 @@ if __name__ == '__main__':
     # (2) crop images
     # (3) generate image-set files
 
-    dir_dataset = '/content/working/dota/'
+    dir_dataset = '/content/working/business_cards_for_ood/'
 
     main('train')
     main('val')

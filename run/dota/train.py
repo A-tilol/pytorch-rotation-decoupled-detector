@@ -42,13 +42,13 @@ def main():
 
     image_size = 768
     lr = 1e-3
-    batch_size = 4
+    batch_size = 6
     num_workers = 4
 
     max_step = 251000
     lr_cfg = [[100000, lr], [200000, lr / 10], [max_step, lr / 50]]
     warm_up = [1000, lr / 50, lr]
-    save_interval = 1000
+    save_interval = 100
 
     aug = Compose([
         ops.ToFloat(),
@@ -65,6 +65,7 @@ def main():
     loader = DataLoader(dataset, batch_size, shuffle=True, num_workers=num_workers, pin_memory=True, drop_last=True,
                         collate_fn=dataset.collate)
     num_classes = len(dataset.names)
+    print("num_classes", num_classes)
 
     prior_box = {
         'strides': [8, 16, 32, 64, 128],

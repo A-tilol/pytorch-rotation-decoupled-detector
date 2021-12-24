@@ -14,6 +14,7 @@ sys.path.append('.')
 
 import os
 import tqdm
+import argparse
 import wandb
 import torch
 
@@ -33,16 +34,18 @@ from utils.parallel import convert_model, CustomDetDataParallel
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model_path', type=str)
+    args = parser.parse_args()
+    
     dir_weight = os.path.join(dir_save, 'weight')
     dir_log = os.path.join(dir_save, 'log')
     os.makedirs(dir_weight, exist_ok=True)
     writer = SummaryWriter(dir_log)
 
-    fnames = os.listdir(dir_weight)
     current_step = 0
-    if not(len(fnames) == 1 and fnames[0] == ".ipynb_checkpoints"):
-        indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight)]
-        current_step = max(indexes) if indexes else 0
+    indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight) if ".pth" not in path]
+    current_step = max(indexes) if indexes else 0
 
     image_size = 768
     lr = 1e-3

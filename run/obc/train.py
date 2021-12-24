@@ -14,6 +14,7 @@ sys.path.append('.')
 
 import os
 import tqdm
+import wandb
 import torch
 
 from torch import optim
@@ -52,6 +53,7 @@ def main():
     lr_cfg = [[100000, lr], [200000, lr / 10], [max_step, lr / 50]]
     warm_up = [1000, lr / 50, lr]
     save_interval = 100
+    log_interval = 10
 
     aug = Compose([
         ops.ToFloat(),
@@ -82,6 +84,18 @@ def main():
         'num_classes': num_classes,
         'extra': 2,
     }
+    
+    _wandb = wandb.init(project="business_card_ood", config={
+        "img_size": image_size,
+        "lr": lr,
+        "batch_size": batch_size,
+        "num_workers": num_workers,
+        "max_step": max_step,
+        "lr_cfg": lr_cfg,
+        "warm_up": warm_up,
+        "save_interval": save_interval,
+        "num_classes": num_classes,
+    })
 
     model = RDD(backbone(fetch_feature=True), cfg)
     model.build_pipe(shape=[2, 3, image_size, image_size])
@@ -114,6 +128,9 @@ def main():
             writer.flush()
             tqdm_loader.set_postfix(losses)
             tqdm_loader.set_description(f'<{current_step}/{max_step}>')
+
+            if current_step % log_interval == 0:
+                _wandb.log(losses)
 
             if current_step % save_interval == 0:
                 save_path = os.path.join(dir_weight, '%d.pth' % current_step)

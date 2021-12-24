@@ -37,16 +37,18 @@ from utils.parallel import CustomDetDataParallel
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--thresh', default=0.01, type=float)
+    parser.add_argument('--model_path', type=str)
     args = parser.parse_args()
-    
-    global checkpoint
-    if checkpoint is None:
-        dir_weight = os.path.join(dir_save, 'weight')
-        # indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight)]
-        # current_step = max(indexes)
-        checkpoint = os.path.join(dir_weight, os.listdir(dir_weight)[0])
-        print("checkpoint", checkpoint)
-        # checkpoint = os.path.join(dir_weight, '%d.pth' % current_step)
+
+    checkpoint = args.model_path
+    # global checkpoint
+    # if checkpoint is None:
+    #     dir_weight = os.path.join(dir_save, 'weight')
+    #     # indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight)]
+    #     # current_step = max(indexes)
+    #     checkpoint = os.path.join(dir_weight, os.listdir(dir_weight)[0])
+    #     print("checkpoint", checkpoint)
+    #     # checkpoint = os.path.join(dir_weight, '%d.pth' % current_step)
 
     batch_size = 32
     num_workers = 4
@@ -137,12 +139,12 @@ if __name__ == '__main__':
     device_ids = [0]
     torch.cuda.set_device(device_ids[0])
 
-    dir_dataset = '/content/dota/'
-    dir_save = '/content/'
+    dir_dataset = '/content/working/obc/'
+    dir_save = '/content/working/'
 
     backbone = resnet.resnet101
     checkpoint = None
     old_version = False  # set True when using the original weights
-    image_set = 'test'  # test-768
+    image_set = 'val'  # test-768
 
     main()

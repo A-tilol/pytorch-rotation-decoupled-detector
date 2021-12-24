@@ -23,7 +23,7 @@ from torch.utils.data import DataLoader
 
 from data.aug import ops
 from data.aug.compose import Compose
-from data.dataset import DOTA
+from data.dataset import OBC
 
 from model.rdd import RDD
 from model.backbone import resnet
@@ -41,6 +41,7 @@ def main():
     args = parser.parse_args()
 
     checkpoint = args.model_path
+    print("checkpoint", checkpoint)
     # global checkpoint
     # if checkpoint is None:
     #     dir_weight = os.path.join(dir_save, 'weight')
@@ -55,7 +56,7 @@ def main():
 
     image_size = 768
     aug = Compose([ops.PadSquare(), ops.Resize(image_size)])
-    dataset = DOTA(dir_dataset, image_set, aug)
+    dataset = OBC(dir_dataset, image_set, aug)
     loader = DataLoader(dataset, batch_size, num_workers=num_workers, pin_memory=True, collate_fn=dataset.collate)
     num_classes = len(dataset.names)
 

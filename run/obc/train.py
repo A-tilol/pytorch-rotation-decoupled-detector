@@ -37,8 +37,11 @@ def main():
     os.makedirs(dir_weight, exist_ok=True)
     writer = SummaryWriter(dir_log)
 
-    indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight)]
-    current_step = max(indexes) if indexes else 0
+    fnames = os.listdir(dir_weight)
+    current_step = 0
+    if not(len(fnames) == 1 and fnames[0] == ".ipynb_checkpoints"):
+        indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight)]
+        current_step = max(indexes) if indexes else 0
 
     image_size = 768
     lr = 1e-3

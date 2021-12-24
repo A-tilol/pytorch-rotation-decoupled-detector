@@ -49,7 +49,7 @@ def main():
 
     image_size = 768
     lr = 1e-3
-    batch_size = 6
+    batch_size = 8
     num_workers = 4
 
     max_step = 251000

@@ -10,4 +10,4 @@ CATEGORY_UCAS_AOD = ['car', 'plane']
 
 CATEGORY_HRSC2016 = ['ship']
 
-CATEGORY_OBC = ['business_card']
+CATEGORY_OBC = ['business-card']

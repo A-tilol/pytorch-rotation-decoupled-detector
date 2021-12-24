@@ -139,7 +139,7 @@ if __name__ == '__main__':
     device_ids = [0]
     torch.cuda.set_device(device_ids[0])
 
-    dir_dataset = '/content/working/obc/'
+    dir_dataset = '/content/working/business_cards_for_ood/'
     dir_save = '/content/working/'
 
     backbone = resnet.resnet101

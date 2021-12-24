@@ -44,7 +44,7 @@ def main():
     writer = SummaryWriter(dir_log)
 
     current_step = 0
-    indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight) if ".pth" not in path]
+    indexes = [int(os.path.splitext(path)[0]) for path in os.listdir(dir_weight) if ".pth" in path]
     current_step = max(indexes) if indexes else 0
 
     image_size = 768

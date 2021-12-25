@@ -131,7 +131,7 @@ def main():
                 writer.add_scalar(key, val, global_step=current_step)
                 if key not in losses_for_log:
                     losses_for_log[key] = 0
-                losses_for_log[key] += val.item()
+                losses_for_log[key] += val.item() / log_interval
             writer.flush()
             tqdm_loader.set_postfix(losses)
             tqdm_loader.set_description(f'<{current_step}/{max_step}>')

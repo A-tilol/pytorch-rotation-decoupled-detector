@@ -114,6 +114,7 @@ def main():
     training = True
     while training and current_step < max_step:
         tqdm_loader = tqdm.tqdm(loader)
+        losses_for_log = {}
         for images, targets, infos in tqdm_loader:
             current_step += 1
             adjust_lr_multi_step(optimizer, current_step, lr_cfg, warm_up)
@@ -128,12 +129,16 @@ def main():
             for key, val in list(losses.items()):
                 losses[key] = val.item()
                 writer.add_scalar(key, val, global_step=current_step)
+                if key not in losses_for_log:
+                    losses_for_log[key] = 0
+                losses_for_log[key] += val.item()
             writer.flush()
             tqdm_loader.set_postfix(losses)
             tqdm_loader.set_description(f'<{current_step}/{max_step}>')
 
             if current_step % log_interval == 0:
-                _wandb.log(losses)
+                _wandb.log(losses_for_log)
+                losses_for_log = {}
 
             if current_step % save_interval == 0:
                 save_path = os.path.join(dir_weight, '%d.pth' % current_step)
